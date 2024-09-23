@@ -2,7 +2,9 @@ package com.server.myvns.models.student;
 
 import com.server.myvns.common.repository.StudentRepository;
 import com.server.myvns.common.service.SimpleCrudService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -20,14 +22,13 @@ public class StudentService implements SimpleCrudService<StudentDto> {
     @Override
     public List<StudentDto> getAll(Integer page, Integer size) {
         Page<Student> students = studentRepository.findAll(PageRequest.of(page, size));
-        return students.map(studentMapper::toDto).getContent();
+        return studentMapper.toStudentDtoList(students.getContent());
     }
 
     @Override
     public StudentDto save(StudentDto entity) {
-        Student student = studentMapper.fromDto(entity);
-
-        return studentMapper.toDto(studentRepository.save(student));
+        Student student = studentMapper.toStudent(entity);
+        return studentMapper.toStudentDto(studentRepository.save(student));
     }
 
     @Override

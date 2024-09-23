@@ -18,7 +18,7 @@ public class StudentController implements SimpleCrudController<StudentDto> {
     @GetMapping
     @Override
     public ResponseEntity<List<StudentDto>> getAll(
-            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "1") Integer size
     ) {
         return ResponseEntity.ok(studentService.getAll(page, size));
@@ -27,7 +27,8 @@ public class StudentController implements SimpleCrudController<StudentDto> {
     @PostMapping
     @Override
     public ResponseEntity<StudentDto> save(@Valid @RequestBody StudentDto entity) {
-        System.out.println(entity);
+        System.out.println(entity.getFirstname());
+
         return ResponseEntity.ok(studentService.save(entity));
     }
 
