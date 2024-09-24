@@ -1,5 +1,6 @@
 package com.server.myvns.common.exceptions;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +34,11 @@ public class HTTPExceptionHandlers extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(exception.getMessage());
     }
 
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    protected ResponseEntity<Object> entityNotFoundExceptionHandler(EntityNotFoundException exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage());
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
@@ -44,4 +51,5 @@ public class HTTPExceptionHandlers extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         return ResponseEntity.status(status).body(ex.getMessage());
     }
+
 }
