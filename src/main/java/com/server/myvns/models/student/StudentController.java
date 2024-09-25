@@ -1,12 +1,10 @@
 package com.server.myvns.models.student;
 
 import com.server.myvns.common.controller.SimpleCrudController;
-import com.server.myvns.common.repository.StudentRepository;
-import com.server.myvns.common.util.RepositoryUtilService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +15,11 @@ import java.util.List;
 public class StudentController implements SimpleCrudController<StudentDto> {
 
     private final StudentService studentService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setDisallowedFields("id", "timestamp");
+    }
 
     @GetMapping
     @Override
@@ -45,8 +48,9 @@ public class StudentController implements SimpleCrudController<StudentDto> {
         return ResponseEntity.ok(studentService.getById(id));
     }
 
+    @PutMapping("/{id}")
     @Override
-    public ResponseEntity<StudentDto> updatedById(Long id, StudentDto entity) {
-        return null;
+    public ResponseEntity<StudentDto> updatedById(@PathVariable Long id, @Valid @RequestBody StudentDto entity) {
+        return ResponseEntity.ok(studentService.updatedById(id, entity));
     }
 }

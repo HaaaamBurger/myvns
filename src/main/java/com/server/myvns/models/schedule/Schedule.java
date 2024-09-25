@@ -1,10 +1,19 @@
 package com.server.myvns.models.schedule;
 
 import com.server.myvns.models.NamedEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.server.myvns.models.subject.Subject;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Entity
-@Table(name = "schedules")
+import java.util.List;
+
+@Getter
+@Setter
+@Entity(name = "schedules")
 public class Schedule extends NamedEntity {
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OrderBy("name")
+    private List<Subject> subject;
 }

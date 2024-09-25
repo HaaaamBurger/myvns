@@ -1,5 +1,7 @@
-package com.server.myvns.models.student;
+package com.server.myvns.common.mappers;
 
+import com.server.myvns.models.student.Student;
+import com.server.myvns.models.student.StudentDto;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
