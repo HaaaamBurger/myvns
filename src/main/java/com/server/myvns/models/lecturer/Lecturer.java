@@ -1,6 +1,7 @@
 package com.server.myvns.models.lecturer;
 
 import com.server.myvns.models.PersonEntity;
+import com.server.myvns.models.department.Department;
 import com.server.myvns.models.subject.Subject;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -20,7 +21,8 @@ public class Lecturer extends PersonEntity {
     @Enumerated(EnumType.STRING)
     private LecturerStatus lecturer_status;
 
-    @OneToMany
-    @JoinColumn()
-    private List<Subject> leading_subjects;
+    @OneToOne
+    @JoinColumn(name = "leading_department_id")
+    private Department department;
+
 }

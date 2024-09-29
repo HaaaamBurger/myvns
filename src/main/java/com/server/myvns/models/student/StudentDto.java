@@ -9,7 +9,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
 public class StudentDto extends PersonEntity {
 
     @Enumerated(value = EnumType.STRING)

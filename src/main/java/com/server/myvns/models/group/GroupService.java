@@ -2,7 +2,10 @@ package com.server.myvns.models.group;
 
 import com.server.myvns.common.mappers.GroupMapper;
 import com.server.myvns.common.repository.GroupRepository;
+import com.server.myvns.common.repository.ScheduleRepository;
 import com.server.myvns.common.service.SimpleCrudService;
+import com.server.myvns.models.schedule.Schedule;
+import com.server.myvns.util.RepositoryUtilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +19,12 @@ public class GroupService implements SimpleCrudService<GroupDto> {
 
     private final GroupRepository groupRepository;
 
+    private final ScheduleRepository scheduleRepository;
+
     private final GroupMapper groupMapper;
+
+    private final RepositoryUtilService<Group, Long> groupRepositoryUtilService;
+    private final RepositoryUtilService<Schedule, Long> scheduleRepositoryUtilService;
 
     @Override
     public List<GroupDto> getAll(Integer page, Integer size) {
@@ -26,21 +34,43 @@ public class GroupService implements SimpleCrudService<GroupDto> {
 
     @Override
     public GroupDto save(GroupDto entity) {
-        return null;
+        Group group = groupMapper.toGroup(entity);
+        return groupMapper.toGroupDro(groupRepository.save(group));
     }
 
     @Override
     public GroupDto removeById(Long id) {
-        return null;
+        Group group = groupRepositoryUtilService.findEntityOrThrowException(groupRepository, id);
+        groupRepository.delete(group);
+        return groupMapper.toGroupDro(group);
     }
 
     @Override
     public GroupDto getById(Long id) {
-        return null;
+        Group group = groupRepositoryUtilService.findEntityOrThrowException(groupRepository, id);
+        return groupMapper.toGroupDro(group);
     }
 
     @Override
     public GroupDto updatedById(Long id, GroupDto entity) {
-        return null;
+        Group group = groupRepositoryUtilService.findEntityOrThrowException(groupRepository, id);
+
+        group.setName(entity.getName());
+        group.setSchedule(entity.getSchedule());
+
+        groupRepository.save(group);
+
+        return groupMapper.toGroupDro(group);
+    }
+
+    public GroupDto assignScheduleToGroup(Long groupId, Long scheduleId) {
+        Group group = groupRepositoryUtilService.findEntityOrThrowException(groupRepository, groupId);
+        Schedule schedule = scheduleRepositoryUtilService.findEntityOrThrowException(scheduleRepository, scheduleId);
+
+        group.setSchedule(schedule);
+
+        groupRepository.save(group);
+
+        return groupMapper.toGroupDro(group);
     }
 }

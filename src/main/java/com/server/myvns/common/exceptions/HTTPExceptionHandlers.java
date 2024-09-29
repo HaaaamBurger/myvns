@@ -39,9 +39,9 @@ public class HTTPExceptionHandlers extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(exception.getMessage());
     }
 
+    //TODO Change handling because when "Required body is missing" message is too long"
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-
         return ResponseEntity.status(status).body(
                 ex.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("\n"))
         );

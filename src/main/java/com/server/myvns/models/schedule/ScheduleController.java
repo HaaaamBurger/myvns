@@ -23,7 +23,10 @@ public class ScheduleController implements SimpleCrudController<ScheduleDto> {
 
     @GetMapping
     @Override
-    public ResponseEntity<List<ScheduleDto>> getAll(@RequestParam Integer page, @RequestParam Integer size) {
+    public ResponseEntity<List<ScheduleDto>> getAll(
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            @RequestParam(required = false, defaultValue = "1") Integer size
+    ) {
         return ResponseEntity.ok(scheduleService.getAll(page, size));
     }
 
@@ -49,5 +52,10 @@ public class ScheduleController implements SimpleCrudController<ScheduleDto> {
     @Override
     public ResponseEntity<ScheduleDto> updatedById(@PathVariable Long id, @Valid @RequestBody ScheduleDto entity) {
         return ResponseEntity.ok(scheduleService.updatedById(id, entity));
+    }
+
+    @PatchMapping("/{scheduleId}/subject/{subjectId}")
+    public ResponseEntity<ScheduleDto> addSubjectToSchedule(@PathVariable Long scheduleId, @PathVariable Long subjectId) {
+        return ResponseEntity.ok(scheduleService.addSubjectToSchedule(scheduleId, subjectId));
     }
 }
