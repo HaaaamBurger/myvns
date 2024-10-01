@@ -1,4 +1,4 @@
-package com.server.myvns.common.repository;
+package com.server.myvns.common.repositories;
 
 import com.server.myvns.models.subject.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;

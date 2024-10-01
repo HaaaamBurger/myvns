@@ -1,9 +1,9 @@
 package com.server.myvns.models.schedule;
 
 import com.server.myvns.common.mappers.ScheduleMapper;
-import com.server.myvns.common.repository.ScheduleRepository;
-import com.server.myvns.common.repository.SubjectRepository;
-import com.server.myvns.common.service.SimpleCrudService;
+import com.server.myvns.common.repositories.ScheduleRepository;
+import com.server.myvns.common.repositories.SubjectRepository;
+import com.server.myvns.common.services.SimpleCrudService;
 import com.server.myvns.models.subject.Subject;
 import com.server.myvns.util.RepositoryUtilService;
 import lombok.RequiredArgsConstructor;

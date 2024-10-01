@@ -1,6 +1,8 @@
 package com.server.myvns.models.department;
 
-import com.server.myvns.common.controller.SimpleCrudController;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.server.myvns.common.controllers.SimpleCrudController;
+import com.server.myvns.common.views.View;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ public class DepartmentController implements SimpleCrudController<DepartmentDto>
     }
 
     //TODO Refactor all paging routes. if page and size == null, then show all entities
+    @JsonView(View.Public.class)
     @GetMapping
     @Override
     public ResponseEntity<List<DepartmentDto>> getAll(
@@ -52,5 +55,11 @@ public class DepartmentController implements SimpleCrudController<DepartmentDto>
     @Override
     public ResponseEntity<DepartmentDto> updatedById(@PathVariable Long id, @Valid @RequestBody DepartmentDto entity) {
         return ResponseEntity.ok(departmentService.updatedById(id, entity));
+    }
+
+    @JsonView(View.Public.class)
+    @PatchMapping("/{departmentId}/lecturer/{lecturerId}")
+    public ResponseEntity<DepartmentDto> assignLeadingLecturerToDepartment(@PathVariable Long departmentId, @PathVariable Long lecturerId) {
+        return ResponseEntity.ok(departmentService.assignLeadingLecturerToDepartment(lecturerId, departmentId));
     }
 }

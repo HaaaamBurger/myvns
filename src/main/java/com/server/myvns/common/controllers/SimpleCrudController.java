@@ -1,6 +1,5 @@
-package com.server.myvns.common.controller;
+package com.server.myvns.common.controllers;
 
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 

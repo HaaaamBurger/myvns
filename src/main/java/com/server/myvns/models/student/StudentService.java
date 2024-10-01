@@ -1,8 +1,8 @@
 package com.server.myvns.models.student;
 
 import com.server.myvns.common.mappers.StudentMapper;
-import com.server.myvns.common.repository.StudentRepository;
-import com.server.myvns.common.service.SimpleCrudService;
+import com.server.myvns.common.repositories.StudentRepository;
+import com.server.myvns.common.services.SimpleCrudService;
 import com.server.myvns.util.RepositoryUtilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

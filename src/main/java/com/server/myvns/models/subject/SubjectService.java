@@ -1,8 +1,8 @@
 package com.server.myvns.models.subject;
 
 import com.server.myvns.common.mappers.SubjectMapper;
-import com.server.myvns.common.repository.SubjectRepository;
-import com.server.myvns.common.service.SimpleCrudService;
+import com.server.myvns.common.repositories.SubjectRepository;
+import com.server.myvns.common.services.SimpleCrudService;
 import com.server.myvns.util.RepositoryUtilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

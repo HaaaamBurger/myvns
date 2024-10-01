@@ -1,6 +1,6 @@
 package com.server.myvns.models.student;
 
-import com.server.myvns.common.controller.SimpleCrudController;
+import com.server.myvns.common.controllers.SimpleCrudController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
