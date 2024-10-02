@@ -70,7 +70,7 @@ public class DepartmentService implements SimpleCrudService<DepartmentDto> {
         Department department = departmentUtilService.findEntityOrThrowException(departmentRepository, departmentId);
 
         department.setLeading_lecturer(lecturer);
-        lecturer.setLeading_department(department);
+        lecturer.setDepartment(department);
 
         departmentRepository.save(department);
         lecturerRepository.save(lecturer);

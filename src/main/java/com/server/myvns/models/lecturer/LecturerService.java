@@ -52,7 +52,7 @@ public class LecturerService implements SimpleCrudService<LecturerDto> {
 
         lecturer.setFirstname(entity.getFirstname());
         lecturer.setLastname(entity.getLastname());
-        lecturer.setLeading_department(entity.getLeading_department());
+        lecturer.setDepartment(entity.getDepartment());
         lecturer.setLecturer_status(entity.getLecturer_status());
 
         lecturerRepository.save(lecturer);

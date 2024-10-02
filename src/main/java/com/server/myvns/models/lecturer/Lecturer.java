@@ -1,5 +1,6 @@
 package com.server.myvns.models.lecturer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.server.myvns.models.PersonEntity;
 import com.server.myvns.models.department.Department;
 import jakarta.persistence.*;
@@ -18,8 +19,8 @@ public class Lecturer extends PersonEntity {
     @Enumerated(EnumType.STRING)
     private LecturerStatus lecturer_status;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "leading_department_id")
-    private Department leading_department;
+    @JsonIgnore
+    @OneToOne(mappedBy = "leading_lecturer",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Department department;
 
 }

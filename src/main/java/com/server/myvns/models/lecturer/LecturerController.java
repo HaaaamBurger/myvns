@@ -1,8 +1,6 @@
 package com.server.myvns.models.lecturer;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.server.myvns.common.controllers.SimpleCrudController;
-import com.server.myvns.common.views.View;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,6 @@ public class LecturerController implements SimpleCrudController<LecturerDto> {
 
     private final LecturerService lecturerService;
 
-    @JsonView(View.Private.class)
     @GetMapping
     @Override
     public ResponseEntity<List<LecturerDto>> getAll(

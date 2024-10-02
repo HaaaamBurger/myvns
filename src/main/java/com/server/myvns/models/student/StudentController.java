@@ -53,4 +53,9 @@ public class StudentController implements SimpleCrudController<StudentDto> {
     public ResponseEntity<StudentDto> updatedById(@PathVariable Long id, @Valid @RequestBody StudentDto entity) {
         return ResponseEntity.ok(studentService.updatedById(id, entity));
     }
+
+    @PatchMapping("/{studentId}/department/{departmentId}")
+    public ResponseEntity<StudentDto> assignStudentToDepartment(@PathVariable Long studentId, @PathVariable Long departmentId) {
+        return ResponseEntity.ok(studentService.assignStudentToDepartment(studentId, departmentId));
+    }
 }

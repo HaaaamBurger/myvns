@@ -1,6 +1,7 @@
 package com.server.myvns.models.student;
 
 import com.server.myvns.models.PersonEntity;
+import com.server.myvns.models.department.Department;
 import com.server.myvns.models.group.Group;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -22,10 +23,9 @@ public class Student extends PersonEntity {
     @JoinColumn(name = "group_id")
     private Group group;
 
-//    @Column(name = "department")
-//    @NotNull(message = "department field cannot be empty")
-//    @ManyToOne
-//    private Department department;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
 //    @Column(name = "leading_lecturer")
 //    @ManyToOne
