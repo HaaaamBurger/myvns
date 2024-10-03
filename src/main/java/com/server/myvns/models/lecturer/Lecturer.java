@@ -20,7 +20,7 @@ public class Lecturer extends PersonEntity {
     private LecturerStatus lecturer_status;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "leading_lecturer",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "leading_lecturer",fetch = FetchType.LAZY)
     private Department department;
 
 }

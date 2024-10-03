@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "schedules")
 public class Schedule extends NamedEntity {
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "schedule_id")
     private List<Subject> subjects;
 

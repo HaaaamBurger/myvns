@@ -1,8 +1,10 @@
 package com.server.myvns.models.lecturer;
 
 import com.server.myvns.common.mappers.LecturerMapper;
+import com.server.myvns.common.repositories.DepartmentRepository;
 import com.server.myvns.common.repositories.LecturerRepository;
 import com.server.myvns.common.services.SimpleCrudService;
+import com.server.myvns.models.department.Department;
 import com.server.myvns.util.RepositoryUtilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,10 @@ public class LecturerService implements SimpleCrudService<LecturerDto> {
     private final LecturerMapper lecturerMapper;
 
     private final LecturerRepository lecturerRepository;
+
+    private final DepartmentRepository departmentRepository;
+
+    private final RepositoryUtilService<Department, Long> departmentUtilService;
 
     private final RepositoryUtilService<Lecturer, Long> lecturerUtilService;
 
@@ -36,6 +42,11 @@ public class LecturerService implements SimpleCrudService<LecturerDto> {
     @Override
     public LecturerDto removeById(Long id) {
         Lecturer lecturer = lecturerUtilService.findEntityOrThrowException(lecturerRepository, id);
+        Department department = departmentUtilService.findEntityOrThrowException(departmentRepository, lecturer.getDepartment().getId());
+
+        department.setLeading_lecturer(null);
+        departmentRepository.save(department);
+
         lecturerRepository.delete(lecturer);
         return lecturerMapper.toLecturerDro(lecturer);
     }
